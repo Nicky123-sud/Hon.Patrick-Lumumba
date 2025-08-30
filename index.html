@@ -34,6 +34,7 @@
           <li class="nav-item"><a class="nav-link" href="about.html"><i class="bi bi-person me-1"></i>About</a></li>
           <li class="nav-item"><a class="nav-link" href="manifesto.html"><i class="bi bi-file-text me-1"></i>Manifesto</a></li>
           <li class="nav-item"><a class="nav-link" href="community.html"><i class="bi bi-people me-1"></i>Community</a></li>
+          <li class="nav-item"><a class="nav-link" href="gallery.html"><i class="bi bi-images me-1"></i>Gallery</a></li>
           <li class="nav-item"><a class="nav-link" href="news.html"><i class="bi bi-newspaper me-1"></i>News</a></li>
           <li class="nav-item"><a class="nav-link" href="contact.html"><i class="bi bi-telephone me-1"></i>Contact</a></li>
         </ul>
@@ -44,50 +45,433 @@
   <!-- HERO SECTION -->
 <style>
   .hero-section {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-                url('') no-repeat center center;
-    background-size: cover; /* Ensure full image is visible */
-    background-repeat: no-repeat;
-    background-position: center;
-    background-color: #000; /* fallback */
-    width: 100vw;           /* full screen width */
-    height: 100vh;          /* full screen height */
+    position: relative;
+    min-height: 100vh;
+    background: linear-gradient(90deg, 
+      rgba(0, 100, 0, 0.9) 0%, 
+      rgba(0, 100, 0, 0.7) 25%, 
+      rgba(0, 0, 0, 0.3) 40%, 
+      rgba(0, 0, 0, 0.3) 60%, 
+      rgba(0, 100, 0, 0.7) 75%, 
+      rgba(0, 100, 0, 0.9) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    color: white;
     overflow: hidden;
   }
 
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+    z-index: 1;
+  }
+
+  .hero-layout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1400px;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-left-content {
+    flex: 1;
+    text-align: left;
+    color: white;
+    padding-right: 2rem;
+  }
+
+  .hero-center-image {
+    flex: 0 0 auto;
+    position: relative;
+    z-index: 3;
+  }
+
+  .hero-portrait {
+    width: 400px;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .hero-portrait:hover {
+    transform: scale(1.02);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+  }
+
+  .hero-right-content {
+    flex: 1;
+    text-align: right;
+    color: white;
+    padding-left: 2rem;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    max-width: 1200px;
+    padding: 2rem;
+  }
+
+  .hero-title {
+    font-size: 4rem;
+    font-weight: 900;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #ffffff, #ffd700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  }
+
+  .hero-tagline {
+    font-size: 1.25rem;
+    font-style: italic;
+    margin-bottom: 2rem;
+    color: #ffd700;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+  }
+
+  .hero-stats span {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 0.75rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 700;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .hero-stats span:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  .election-countdown {
+    background: linear-gradient(45deg, #dc3545, #c82333);
+    padding: 1.5rem 2.5rem;
+    border-radius: 15px;
+    margin: 2rem 0;
+    font-weight: 700;
+    box-shadow: 0 10px 30px rgba(220, 53, 69, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+
+  .hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .hero-btn {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    border: 2px solid transparent;
+  }
+
+  .hero-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+  }
+
+  .hero-btn-primary {
+    background: linear-gradient(45deg, #28a745, #20c997);
+    color: white;
+    border-color: #28a745;
+  }
+
+  .hero-btn-primary:hover {
+    background: linear-gradient(45deg, #20c997, #28a745);
+    color: white;
+  }
+
+  .hero-btn-secondary {
+    background: transparent;
+    color: white;
+    border-color: white;
+  }
+
+  .hero-btn-secondary:hover {
+    background: white;
+    color: #000;
+  }
+
+  .hero-btn-warning {
+    background: linear-gradient(45deg, #ffc107, #fd7e14);
+    color: white;
+    border-color: #ffc107;
+  }
+
+  .hero-btn-warning:hover {
+    background: linear-gradient(45deg, #fd7e14, #ffc107);
+    color: white;
+  }
+
+  .floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .floating-element {
+    position: absolute;
+    opacity: 0.15;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .floating-element:nth-child(1) {
+    top: 15%;
+    left: 5%;
+    animation-delay: 0s;
+  }
+
+  .floating-element:nth-child(2) {
+    top: 25%;
+    left: 8%;
+    animation-delay: 1s;
+  }
+
+  .floating-element:nth-child(3) {
+    top: 35%;
+    left: 12%;
+    animation-delay: 2s;
+  }
+
+  .floating-element:nth-child(4) {
+    top: 15%;
+    right: 5%;
+    animation-delay: 0.5s;
+  }
+
+  .floating-element:nth-child(5) {
+    top: 25%;
+    right: 8%;
+    animation-delay: 1.5s;
+  }
+
+  .floating-element:nth-child(6) {
+    top: 35%;
+    right: 12%;
+    animation-delay: 2.5s;
+  }
+
+  .floating-element:nth-child(7) {
+    bottom: 20%;
+    left: 8%;
+    animation-delay: 3s;
+  }
+
+  .floating-element:nth-child(8) {
+    bottom: 30%;
+    right: 10%;
+    animation-delay: 3.5s;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+  }
+
   @media (max-width: 768px) {
-    .hero-section {
-      background-size: contain;
-      height: auto;
-      padding: 80px 20px;
+    .hero-layout {
+      flex-direction: column;
+      padding: 1rem;
+      gap: 2rem;
+    }
+    
+    .hero-left-content,
+    .hero-right-content {
+      text-align: center;
+      padding: 0;
+    }
+    
+    .hero-portrait {
+      width: 300px;
+      height: 375px;
+    }
+    
+    .hero-title {
+      font-size: 2.5rem;
+      text-align: center !important;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.2rem;
+      text-align: center !important;
+    }
+    
+    .hero-tagline {
+      text-align: center !important;
+    }
+    
+    .hero-stats {
+      gap: 1rem;
+      justify-content: center !important;
+    }
+    
+    .hero-stats span {
+      font-size: 0.9rem;
+      padding: 0.6rem 1.2rem;
+    }
+    
+    .election-countdown {
+      text-align: center !important;
+    }
+    
+    .hero-buttons {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center !important;
+    }
+    
+    .hero-btn {
+      width: 100%;
+      max-width: 300px;
+    }
+    
+    .floating-elements {
+      display: none;
     }
   }
 </style>
 
+<header class="hero-section">
+  <!-- Floating Elements -->
+  <div class="floating-elements">
+    <div class="floating-element">
+      <i class="bi bi-star-fill" style="font-size: 2rem; color: #ffd700;"></i>
+    </div>
+    <div class="floating-element">
+      <i class="bi bi-heart-fill" style="font-size: 1.5rem; color: #dc3545;"></i>
+    </div>
+    <div class="floating-element">
+      <i class="bi bi-flag-fill" style="font-size: 2.5rem; color: #28a745;"></i>
+    </div>
+    <div class="floating-element">
+      <i class="bi bi-award-fill" style="font-size: 1.8rem; color: #ffd700;"></i>
+    </div>
+    <div class="floating-element">
+      <i class="bi bi-people-fill" style="font-size: 2.2rem; color: #28a745;"></i>
+    </div>
+    <div class="floating-element">
+      <i class="bi bi-check-circle-fill" style="font-size: 1.6rem; color: #dc3545;"></i>
+    </div>
+    <div class="floating-element">
+      <i class="bi bi-lightning-fill" style="font-size: 2rem; color: #ffd700;"></i>
+    </div>
+    <div class="floating-element">
+      <i class="bi bi-shield-fill" style="font-size: 1.9rem; color: #28a745;"></i>
+    </div>
+  </div>
 
+  <div class="hero-layout">
+    <!-- Left Content -->
+    <div class="hero-left-content">
+      <h1 class="hero-title" style="text-align: left; font-size: 3rem;">Hon. Patrick Lumumba</h1>
+      <p class="hero-subtitle" style="text-align: left;">For MP – Kitutu Chache South 2027</p>
+      <p class="hero-tagline" style="text-align: left;">"A Future That Cares – For All"</p>
+      
+      <!-- Hero Stats -->
+      <div class="hero-stats" style="justify-content: flex-start;">
+        <span><i class="bi bi-people-fill me-2"></i>50,000+ Supporters</span>
+        <span><i class="bi bi-award-fill me-2"></i>35+ Years Experience</span>
+      </div>
+      
+      <!-- Election Countdown -->
+      <div class="election-countdown" style="text-align: left;">
+        <i class="bi bi-calendar-event me-2"></i>
+        <span id="countdown">Loading...</span> until 2027 Elections
+      </div>
+      
+      <!-- Hero Buttons -->
+      <div class="hero-buttons" style="justify-content: flex-start;">
+        <a href="manifesto.html" class="hero-btn hero-btn-primary">
+          <i class="bi bi-file-text me-2"></i>🗳️ Read Manifesto
+        </a>
+        <a href="contact.html" class="hero-btn hero-btn-secondary">
+          <i class="bi bi-telephone me-2"></i>📞 Get in Touch
+        </a>
+      </div>
+    </div>
 
+    <!-- Center Image -->
+    <div class="hero-center-image">
+      <img src="images/patrick.jpg" alt="Hon. Patrick Lumumba" class="hero-portrait">
+    </div>
 
-<header class="hero-image-section position-relative text-white text-center">
-  <img src="images/patrick.jpg" alt="Hon. Patrick Lumumba" class="w-100" style="height: auto; max-height: 100vh; object-fit: contain;">
-  
-  <div class="hero-overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center" style="background-color: rgba(0,0,0,0.5);">
-    <h1 class="display-4 fw-bold">Hon. Patrick Lumumba</h1>
-    <p class="lead">For MP – Kitutu Chache South 2027</p>
-    <p class="fs-4 fst-italic">"A Future That Cares – For All"</p>
-    <div class="mt-4">
-      <a href="manifesto.html" class="btn btn-success btn-lg me-3">🗳️ Read Manifesto</a>
-      <a href="contact.html" class="btn btn-outline-primary btn-lg">📞 Get in Touch</a>
+    <!-- Right Content -->
+    <div class="hero-right-content">
+      <div class="hero-stats" style="justify-content: flex-end;">
+        <span><i class="bi bi-check-circle-fill me-2"></i>100+ Projects Delivered</span>
+        <span><i class="bi bi-shield-fill me-2"></i>Trusted Leadership</span>
+      </div>
+      
+      <div style="text-align: right; margin: 2rem 0;">
+        <h3 style="color: #ffd700; margin-bottom: 1rem;">Vision for Kitutu Chache South</h3>
+        <p style="line-height: 1.6; margin-bottom: 1rem;">Empowering communities through sustainable development, quality education, and accessible healthcare.</p>
+        <p style="line-height: 1.6;">Building bridges between government and the people for a brighter future.</p>
+      </div>
+      
+      <div class="hero-buttons" style="justify-content: flex-end;">
+        <a href="gallery.html" class="hero-btn hero-btn-warning">
+          <i class="bi bi-images me-2"></i>📸 View Gallery
+        </a>
+        <a href="about.html" class="hero-btn hero-btn-secondary">
+          <i class="bi bi-person-fill me-2"></i>Learn More
+        </a>
+      </div>
     </div>
   </div>
 </header>
-
-
-
   <!-- KEY HIGHLIGHTS SECTION -->
   <section class="py-5 bg-light">
     <div class="container">
@@ -104,6 +488,9 @@
               <div class="emoji-icon">👨‍💼</div>
               <h4 class="card-title">Experienced Leader</h4>
               <p class="card-text">Former County Secretary & Head of Public Service with extensive experience in government administration and policy implementation.</p>
+              <div class="mt-3">
+                <span class="badge bg-success">15+ Years Experience</span>
+              </div>
             </div>
           </div>
         </div>
@@ -113,6 +500,9 @@
               <div class="emoji-icon">🧑‍🤝‍🧑</div>
               <h4 class="card-title">Community Focused</h4>
               <p class="card-text">Dedicated to uplifting Kitutu Chache South through education, infrastructure, healthcare, and youth empowerment programs.</p>
+              <div class="mt-3">
+                <span class="badge bg-primary">50,000+ Lives Impacted</span>
+              </div>
             </div>
           </div>
         </div>
@@ -122,6 +512,9 @@
               <div class="emoji-icon">📈</div>
               <h4 class="card-title">Results Driven</h4>
               <p class="card-text">Track record of delivering tangible results in cooperative development, public administration, and strategic management.</p>
+              <div class="mt-3">
+                <span class="badge bg-warning">100+ Projects Delivered</span>
+              </div>
             </div>
           </div>
         </div>
@@ -194,6 +587,39 @@
           </div>
         </div>
       </div>
+      
+      <!-- Campaign Progress -->
+      <div class="row mt-5">
+        <div class="col-12">
+          <h3 class="fw-bold mb-4">🎯 Campaign Progress</h3>
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <div class="card bg-light text-dark">
+                <div class="card-body text-center">
+                  <h4 class="text-primary">25+</h4>
+                  <p class="mb-0">Schools Supported</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <div class="card bg-light text-dark">
+                <div class="card-body text-center">
+                  <h4 class="text-primary">150+</h4>
+                  <p class="mb-0">KM Roads Improved</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <div class="card bg-light text-dark">
+                <div class="card-body text-center">
+                  <h4 class="text-primary">10+</h4>
+                  <p class="mb-0">Health Facilities</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -208,6 +634,7 @@
               <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active"></button>
               <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1"></button>
               <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2"></button>
+              <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="3"></button>
             </div>
             <div class="carousel-inner">
               <div class="carousel-item active">
@@ -216,6 +643,7 @@
                     <i class="bi bi-quote text-primary" style="font-size: 3rem;"></i>
                     <p class="card-text fs-5 mt-3">"Hon. Lumumba's commitment to education has transformed our school. Our children now have access to modern learning facilities."</p>
                     <h6 class="text-primary mt-3">- Mary Nyanchama, Teacher</h6>
+                    <span class="badge bg-success">Education Sector</span>
                   </div>
                 </div>
               </div>
@@ -225,6 +653,7 @@
                     <i class="bi bi-quote text-primary" style="font-size: 3rem;"></i>
                     <p class="card-text fs-5 mt-3">"The road improvements have made a huge difference in our daily lives. We can now transport our produce to markets easily."</p>
                     <h6 class="text-primary mt-3">- John Obiri, Farmer</h6>
+                    <span class="badge bg-warning">Infrastructure</span>
                   </div>
                 </div>
               </div>
@@ -234,6 +663,17 @@
                     <i class="bi bi-quote text-primary" style="font-size: 3rem;"></i>
                     <p class="card-text fs-5 mt-3">"The youth empowerment program gave me the skills and confidence to start my own business. I'm now employing others."</p>
                     <h6 class="text-primary mt-3">- Sarah Akinyi, Entrepreneur</h6>
+                    <span class="badge bg-info">Youth Empowerment</span>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="card text-center">
+                  <div class="card-body py-5">
+                    <i class="bi bi-quote text-primary" style="font-size: 3rem;"></i>
+                    <p class="card-text fs-5 mt-3">"Hon. Lumumba's presence at our community events shows his genuine care for the people. He's not just a politician, but a true community leader."</p>
+                    <h6 class="text-primary mt-3">- Chief Samuel Otieno, Community Leader</h6>
+                    <span class="badge bg-primary">Community Leadership</span>
                   </div>
                 </div>
               </div>
@@ -299,22 +739,92 @@
     </div>
   </section>
 
+  <!-- LATEST NEWS SECTION -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class="text-center fw-bold mb-5">📰 Latest Campaign News</h2>
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <span class="badge bg-success">Latest</span>
+                <small class="text-muted">December 2024</small>
+              </div>
+              <h5 class="card-title">🎉 Campaign Launch Success</h5>
+              <p class="card-text">Massive turnout at the official campaign launch with thousands of supporters showing their commitment to change.</p>
+              <a href="news.html" class="btn btn-outline-primary btn-sm">Read More</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <span class="badge bg-warning">Community</span>
+                <small class="text-muted">November 2024</small>
+              </div>
+              <h5 class="card-title">🏫 Education Summit</h5>
+              <p class="card-text">Comprehensive discussion with education stakeholders on improving learning outcomes across the constituency.</p>
+              <a href="news.html" class="btn btn-outline-primary btn-sm">Read More</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <span class="badge bg-info">Youth</span>
+                <small class="text-muted">October 2024</small>
+              </div>
+              <h5 class="card-title">👨‍🎓 Youth Empowerment Forum</h5>
+              <p class="card-text">Interactive session with young people focusing on employment opportunities and skills development programs.</p>
+              <a href="news.html" class="btn btn-outline-primary btn-sm">Read More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CALL TO ACTION -->
   <section class="py-5 bg-light">
     <div class="container text-center">
       <h2 class="fw-bold mb-4">🤝 Join the Movement for Change</h2>
       <p class="lead mb-4">Together, we can build a brighter future for Kitutu Chache South. Your voice matters!</p>
+      
+      <!-- Newsletter Signup -->
+      <div class="row justify-content-center mb-4">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">📧 Stay Updated</h5>
+              <p class="card-text">Get the latest campaign news and updates delivered to your inbox.</p>
+              <div class="input-group">
+                <input type="email" class="form-control" placeholder="Enter your email address" required>
+                <button class="btn btn-success" type="submit">Subscribe</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
       <div class="row justify-content-center">
         <div class="col-md-8">
           <div class="row">
-            <div class="col-md-6 mb-3">
+            <div class="col-md-4 mb-3">
               <a href="manifesto.html" class="btn btn-success btn-lg w-100">
                 <i class="bi bi-file-text me-2"></i>🗳️ Read Manifesto
               </a>
             </div>
-            <div class="col-md-6 mb-3">
+            <div class="col-md-4 mb-3">
               <a href="contact.html" class="btn btn-outline-primary btn-lg w-100">
                 <i class="bi bi-envelope me-2"></i>📞 Get in Touch
+              </a>
+            </div>
+            <div class="col-md-4 mb-3">
+              <a href="gallery.html" class="btn btn-warning btn-lg w-100">
+                <i class="bi bi-images me-2"></i>📸 View Gallery
               </a>
             </div>
           </div>
@@ -335,7 +845,66 @@
     </div>
   </footer>
 
+  <!-- Floating Contact Button -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1000;">
+    <a href="contact.html" class="btn btn-success btn-lg rounded-circle shadow" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+      <i class="bi bi-telephone fs-4"></i>
+    </a>
+  </div>
+
   <!-- Bootstrap Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Countdown Timer Script -->
+  <script>
+    // Election countdown timer
+    function updateCountdown() {
+      const electionDate = new Date('August 9, 2027').getTime();
+      const now = new Date().getTime();
+      const distance = electionDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+      document.getElementById('countdown').innerHTML = 
+        days + 'd ' + hours + 'h ' + minutes + 'm';
+
+      if (distance < 0) {
+        document.getElementById('countdown').innerHTML = 'Election Day!';
+      }
+    }
+
+    // Update countdown every minute
+    updateCountdown();
+    setInterval(updateCountdown, 60000);
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Add loading animation to cards
+    window.addEventListener('load', function() {
+      const cards = document.querySelectorAll('.card');
+      cards.forEach((card, index) => {
+        setTimeout(() => {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(20px)';
+          card.style.transition = 'all 0.6s ease';
+          
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, 100);
+        }, index * 100);
+      });
+    });
+  </script>
 </body>
 </html>
