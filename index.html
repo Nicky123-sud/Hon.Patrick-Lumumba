@@ -438,10 +438,45 @@
                 </div>
             </div>
 
-            <!-- Center Image -->
-            <div class="hero-center-image">
-                <img src="images/patrick.jpg" alt="Hon. Patrick Lumumba" class="hero-portrait">
+            <!-- Carousel Container -->
+            <div id="centerCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000" style="max-width: 600px; margin: auto;">
+                <div class="carousel-inner text-center">
+
+                    <!-- First image active -->
+                    <div class="carousel-item active">
+                        <img src="images/WhatsApp Image 2025-08-21 at 4.57.37 PM (1).jpeg" class="d-block mx-auto" style="max-height: 400px; object-fit: contain;">
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="images/WhatsApp Image 2025-08-21 at 4.57.54 PM.jpeg" class="d-block mx-auto" style="max-height: 400px; object-fit: contain;">
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="images/WhatsApp Image 2025-08-22 at 9.56.46 PM.jpeg" class="d-block mx-auto" style="max-height: 400px; object-fit: contain;">
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="images/WhatsApp Image 2025-08-24 at 3.18.53 AM.jpeg" class="d-block mx-auto" style="max-height: 400px; object-fit: contain;">
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="images/WhatsApp Image 2025-08-24 at 3.19.10 AM.jpeg" class="d-block mx-auto" style="max-height: 400px; object-fit: contain;">
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="images/WhatsApp Image 2025-08-29 at 7.50.00 PM.jpeg" class="d-block mx-auto" style="max-height: 400px; object-fit: contain;">
+                    </div>
+
+                </div>
             </div>
+
+            <!-- Extra CSS to make animation 1.5s smooth -->
+            <style>
+                #centerCarousel .carousel-item {
+                    transition: transform 1.5s ease-in-out;
+                    /* slide animation speed */
+                }
+            </style>
 
             <!-- Right Content -->
             <div class="hero-right-content">
