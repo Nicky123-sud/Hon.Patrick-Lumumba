@@ -622,6 +622,38 @@ select:focus {
   }
 }
 
+/* Gallery Image Styles */
+.gallery-img-lg {
+  height: 400px;
+  object-fit: cover;
+}
+
+.gallery-img-med {
+  height: 250px;
+  object-fit: cover;
+}
+
+.gallery-img-contain {
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+  object-fit: contain;
+}
+
+.gallery-img-cover {
+  width: 100%;
+  object-fit: cover;
+}
+
+.gallery-wrap-auto {
+  height: auto;
+  overflow: visible;
+}
+
+.gallery-icon-lg {
+  font-size: 3rem;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
